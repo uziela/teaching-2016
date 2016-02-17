@@ -83,8 +83,16 @@ while (my $line=<IN_FILE>) {
             #print OUT_FILE_ABS $one;
             #print OUT_FILE_REL "$rel ";
             $aa_seq .= $one;
-            $rel_seq .= "$rel ";
-            $abs_seq .= "$abs ";
+            if ($rel < 25) {
+                $rel_seq .= "b";
+            } else {
+                $rel_seq .= "e";
+            }
+            if ($abs < 25) {
+                $abs_seq .= "b";
+            } else {
+                $abs_seq .= "e";
+            }
         }
     }
 }
