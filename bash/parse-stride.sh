@@ -28,7 +28,7 @@ for i in $input_dir/*txt ; do
     base=`basename $i .txt`
     mid=`substr $base 2 5 | tr [a-z] [A-Z]`
     mch=`substr $base 6 6 | tr [a-z] [A-Z]`
-    ./scripts/parse-stride.py output/output-scop-pdb/${mid}.pdb.stride output/output-scop-pdb/${base}.parsed.stride output/output-scop-pdb/${base}.parsed.stride7 $mch $mid
+    ./scripts/parse-stride.py output/output-scop-pdb/${mid}.pdb.stride output/output-scop-pdb/${base}.parsed.stride output/output-scop-pdb/${base}.parsed.stride7 $mch $base
 done
 
 echo_both "$script_name done."

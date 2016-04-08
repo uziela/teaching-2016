@@ -29,15 +29,15 @@ for i in $input_dir/*txt ; do
     mid=`substr $base 2 5 | tr [a-z] [A-Z]`
     mch=`substr $base 6 6 | tr [a-z] [A-Z]`
     echo ">$base" > $output_dir/$base.parsed.dssp8
-    sed -n '/#  RESIDUE AA STRUCTURE/,$p' output/output-scop-pdb/${mid}.pdb.dssp | tail -n +2 | awk -v chain=$mch '{if (substr($0,12,1) == chain || chain == "." || chain == "_") {print substr($0,14,1)}}' | tr -d "\n" >> $output_dir/$base.parsed.dssp8
+    sed -n '/#  RESIDUE AA STRUCTURE/,$p' output/output-scop-pdb/${mid}.pdb.dssp | tail -n +2 | awk -v chain=$mch '{if ((substr($0,12,1) == chain || chain == "." || chain == "_") && (substr($0,14,1) != "!") && (substr($0,14,1) != "X")) {print substr($0,14,1)}}' | tr -d "\n" | tr '[a-z]' 'C' >> $output_dir/$base.parsed.dssp8
     echo >> $output_dir/$base.parsed.dssp8
-    sed -n '/#  RESIDUE AA STRUCTURE/,$p' output/output-scop-pdb/${mid}.pdb.dssp | tail -n +2 | awk -v chain=$mch '{if (substr($0,12,1) == chain || chain == "." || chain == "_") {print substr($0,17,1)}}' | tr " " "C" | tr -d "\n" >> $output_dir/$base.parsed.dssp8
+    sed -n '/#  RESIDUE AA STRUCTURE/,$p' output/output-scop-pdb/${mid}.pdb.dssp | tail -n +2 | awk -v chain=$mch '{if ((substr($0,12,1) == chain || chain == "." || chain == "_") && (substr($0,14,1) != "!") && (substr($0,14,1) != "X")) {print substr($0,17,1)}}' | tr " " "C" | tr -d "\n" >> $output_dir/$base.parsed.dssp8
     echo >> $output_dir/$base.parsed.dssp8
     
     echo ">$base" > $output_dir/$base.parsed.dssp
-    sed -n '/#  RESIDUE AA STRUCTURE/,$p' output/output-scop-pdb/${mid}.pdb.dssp | tail -n +2 | awk -v chain=$mch '{if (substr($0,12,1) == chain || chain == "." || chain == "_") {print substr($0,14,1)}}' | tr -d "\n" >> $output_dir/$base.parsed.dssp
+    sed -n '/#  RESIDUE AA STRUCTURE/,$p' output/output-scop-pdb/${mid}.pdb.dssp | tail -n +2 | awk -v chain=$mch '{if ((substr($0,12,1) == chain || chain == "." || chain == "_") && (substr($0,14,1) != "!") && (substr($0,14,1) != "X")) {print substr($0,14,1)}}' | tr -d "\n" | tr '[a-z]' 'C' >> $output_dir/$base.parsed.dssp
     echo >> $output_dir/$base.parsed.dssp
-    sed -n '/#  RESIDUE AA STRUCTURE/,$p' output/output-scop-pdb/${mid}.pdb.dssp | tail -n +2 | awk -v chain=$mch '{if (substr($0,12,1) == chain || chain == "." || chain == "_") {print substr($0,17,1)}}' | tr "CTSB " "C" | tr "HGI" "H" | tr "E" "S" | tr -d "\n" >> $output_dir/$base.parsed.dssp
+    sed -n '/#  RESIDUE AA STRUCTURE/,$p' output/output-scop-pdb/${mid}.pdb.dssp | tail -n +2 | awk -v chain=$mch '{if ((substr($0,12,1) == chain || chain == "." || chain == "_") && (substr($0,14,1) != "!") && (substr($0,14,1) != "X")) {print substr($0,17,1)}}' | tr "CTSB " "C" | tr "HGI" "H" | tr "E" "S" | tr -d "\n" >> $output_dir/$base.parsed.dssp
     echo >> $output_dir/$base.parsed.dssp
     #echo "my_dssp" > $output_dir/$base.parsed.verify1
     #sed -n '/#  RESIDUE AA STRUCTURE/,$p' output/output-scop-pdb/${mid}.pdb.dssp | tail -n +2 | awk -v chain=$mch '{if (substr($0,12,1) == chain) {print substr($0,17,1)}}' | tr "CTS " "C" | tr "HGI" "H" | tr "EB" "S" >> $output_dir/$base.parsed.verify1
